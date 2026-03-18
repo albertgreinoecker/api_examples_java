@@ -30,5 +30,12 @@
             <version>5.2.2</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.genai</groupId>
+            <artifactId>google-genai</artifactId>
+            <version>1.17.0</version>
+        </dependency>
+
     </dependencies>
 </project>
