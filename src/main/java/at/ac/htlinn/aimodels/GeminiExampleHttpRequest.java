@@ -1,5 +1,7 @@
 package at.ac.htlinn.aimodels;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.net.URI;
@@ -31,6 +33,24 @@ public class GeminiExampleHttpRequest {
         HttpResponse<String> response =
                 client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(response.body());
+        String json =  response.body();
+        System.out.println(json);
+
+        //Use jackson to process JSON Response
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(json);
+
+        // 👉 Text extrahieren
+        String reply = root
+                .path("candidates")
+                .get(0)
+                .path("content")
+                .path("parts")
+                .get(0)
+                .path("text")
+                .asText();
+
+        System.out.println("Antwort:");
+        System.out.println(reply);
     }
 }
