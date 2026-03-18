@@ -1,16 +1,32 @@
 # API Examples Java
 
-Small Java examples for calling REST APIs with:
+This project contains small API examples centered around Java 21 and Maven. It shows different ways to call HTTP APIs, deserialize JSON with Jackson, load secrets from a `.env` file, and combine a Java client with a small FastAPI service.
 
-- Java `HttpClient`
-- `OkHttp`
-- JSON mapping with `Jackson`
-- Environment variables with `java-dotenv`
+## Project Structure
 
-## Requirements
+### Java examples
+
+The Java sources are under `src/main/java` and include:
+
+- `at.ac.htlinn.APITestCalls`: simple GET requests with Java `HttpClient` and `OkHttp`
+- `at.ac.htlinn.APITestCallsJackson`: JSON deserialization into a `Todo` object with Jackson
+- `at.ac.htlinn.openweather.WeatherApp`: OpenWeather request with JSON mapping into Java classes
+- `at.ac.htlinn.aimodels.GeminiExampleHttpRequest`: Gemini API request using Java `HttpClient`
+- `at.ac.htlinn.fastapi.NetflixFastApiOkHttpExample`: OkHttp example for a Netflix/RapidAPI request
+
+### FastAPI example
+
+The `fastapi_netflix_example` folder contains a small Python FastAPI app that exposes a local `/netflix/search` endpoint and forwards requests to the upstream Netflix RapidAPI service.
+
+## Tech Stack
 
 - Java 21
-- Maven 3.9+
+- Maven
+- Jackson
+- OkHttp
+- `java-dotenv`
+- Python FastAPI
+- `httpx`
 
 ## Build
 
@@ -18,28 +34,42 @@ Small Java examples for calling REST APIs with:
 mvn clean package
 ```
 
-## Run
+## Running Examples
 
-From IntelliJ, run one of these main classes:
+You can run the Java examples from IntelliJ or by targeting their main classes directly.
 
-- `at.ac.htlinn.Main` (JSONPlaceholder example)
-- `at.ac.htlinn.openweather.WeatherApp` (OpenWeather example)
+Useful entry points:
 
-## `.env` configuration
+- `at.ac.htlinn.APITestCalls`
+- `at.ac.htlinn.APITestCallsJackson`
+- `at.ac.htlinn.openweather.WeatherApp`
+- `at.ac.htlinn.aimodels.GeminiExampleHttpRequest`
+- `at.ac.htlinn.fastapi.NetflixFastApiOkHttpExample`
 
-The OpenWeather example reads the API key from a `.env` file in the project root.
+To start the FastAPI example:
 
-Create or update `.env`:
-
-```env
-OPENWEATHER_API_KEY=your_api_key_here
+```bash
+cd fastapi_netflix_example
+pip install -r requirements.txt
+uvicorn main:app --reload
 ```
 
-Variable description:
+Then call it locally, for example:
 
-- `OPENWEATHER_API_KEY`: Your OpenWeather API key used by `WeatherApp`.
+```bash
+curl "http://127.0.0.1:8000/netflix/search?title=dark"
+```
 
-Notes:
+## Environment Variables
 
-- Keep `.env` private and never share real API keys.
-- `.env` is already ignored by Git in `.gitignore`.
+The project uses a root `.env` file for API credentials and host configuration.
+
+Keys currently present in `.env`:
+
+- `OPENWEATHER_API_KEY`
+- `NETFLIX_API_KEY`
+- `NETFLIX_API_HOST`
+- `NETFLIX_API_BASE_URL`
+- `GEMINI_API_KEY`
+
+Do not commit real secret values to version control.
