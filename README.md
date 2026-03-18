@@ -14,10 +14,6 @@ The Java sources are under `src/main/java` and include:
 - `at.ac.htlinn.aimodels.GeminiExampleHttpRequest`: Gemini API request using Java `HttpClient`
 - `at.ac.htlinn.fastapi.NetflixFastApiOkHttpExample`: OkHttp example for a Netflix/RapidAPI request
 
-### FastAPI example
-
-The `fastapi_netflix_example` folder contains a small Python FastAPI app that exposes a local `/netflix/search` endpoint and forwards requests to the upstream Netflix RapidAPI service.
-
 ## Tech Stack
 
 - Java 21
@@ -28,11 +24,7 @@ The `fastapi_netflix_example` folder contains a small Python FastAPI app that ex
 - Python FastAPI
 - `httpx`
 
-## Build
 
-```bash
-mvn clean package
-```
 
 ## Running Examples
 
@@ -45,20 +37,6 @@ Useful entry points:
 - `at.ac.htlinn.openweather.WeatherApp`
 - `at.ac.htlinn.aimodels.GeminiExampleHttpRequest`
 - `at.ac.htlinn.fastapi.NetflixFastApiOkHttpExample`
-
-To start the FastAPI example:
-
-```bash
-cd fastapi_netflix_example
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
-
-Then call it locally, for example:
-
-```bash
-curl "http://127.0.0.1:8000/netflix/search?title=dark"
-```
 
 ## Environment Variables
 
