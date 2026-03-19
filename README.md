@@ -21,8 +21,6 @@ The Java sources are under `src/main/java` and include:
 - Jackson
 - OkHttp
 - `java-dotenv`
-- Python FastAPI
-- `httpx`
 
 
 
